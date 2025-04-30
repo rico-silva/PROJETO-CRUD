@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@RequestMapping("/user") // Define o /user a nivel de classe
 @RestController
 public class UserController {
 
@@ -16,6 +21,9 @@ public class UserController {
     ----------------------------------------------------------------------------------------
      */
 
+    //METODOS @POSTMAPPING
+
+
     // Metodo para criação de usuário.
     @PostMapping("/user")
     public String createUser(@RequestBody UserRequest userRequest) {
@@ -24,13 +32,32 @@ public class UserController {
 
     //----------------------------------------------------------------------------------------
 
+    //METODOS @GETMAPPING
+
     // Metodo para acessar todas as informações do usuário através do ID
     @GetMapping("/user/pesquisa-user-id")
     public UserRequest getById(UserRequest userRequest) {
         return userRequest;
     }
 
+    /*
+    UUID é um tipo nativo do JAVA, ela é a mais utilizada para IDs
+     */
+    @GetMapping
+    public UserRequest getUser(@RequestParam UUID userID) {
+        return null;
+    }
+
+    @GetMapping
+    public List<UserRequest> getUser() {
+        List<UserRequest> listaUsuarios = new ArrayList<>();
+        return listaUsuarios;
+    }
+
+
     //----------------------------------------------------------------------------------------
+
+    //METODOS @PUTMAPPING
 
     // Metodo para alterar de usuário
     @PutMapping("/user/id")
@@ -40,6 +67,8 @@ public class UserController {
     }
 
     //----------------------------------------------------------------------------------------
+
+    //METODOS @DELETEMAPPING
 
     // Metodo para apagar de usuário.
     @DeleteMapping("/user/id")
